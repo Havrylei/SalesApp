@@ -1,0 +1,29 @@
+.main {
+    margin-bottom: 8rem
+}
+
+.basket {
+    position: fixed;
+    min-width: 190px;
+    height: 7rem;
+    background-color: #f8f8f8;
+    border-radius: 15px 0 0 0;
+    bottom: 0;
+    right: 0;
+    color: #777;
+    padding: .5em 1em
+}
+
+.product-img {
+    height: 250px;
+    width: 250px;
+    object-fit: cover
+}
+
+.in-stock-img {
+    cursor: pointer
+}
+
+.out-of-stock-img {
+    opacity: .3
+}

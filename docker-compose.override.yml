@@ -1,0 +1,22 @@
+version: '3.4'
+
+services:
+  salesdb:
+    environment:
+      POSTGRES_PASSWORD: supers3cret
+      POSTGRES_USER: sa
+      POSTGRES_DB: SalesDb
+    ports:
+      - 5432:5432
+  salesapi:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:7174
+    ports:
+      - 7174:7174
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+  salesui:  
+    ports:
+      - 80:80

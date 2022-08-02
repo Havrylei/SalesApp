@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Generous August</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-cookies.js"></script>
+    <script src="module.js"></script>
+</head>
+
+<body>
+    <div ng-app="salesApp" class="main" ng-controller="indexController">
+        <nav class="navbar navbar-default mt-5">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">Generous August</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li><a href="#">Home</a></li>
+                    <li ng-repeat="category in categories"><a href="#!products/{{category.id}}">{{category.name}}</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div class="container">
+            <div class="alert alert-{{alertType}}" ng-if="alertType && alertText">
+                <a href="#" class="close" ng-click="$event.preventDefault(); closeAlert()">&times;</a>
+                {{alertText}}
+            </div>
+            <div ng-view></div>
+        </div>
+        <div ng-controller="basketController">
+            <div class="basket" ng-if="totalAmount > 0">
+                <h5 class="text-center">Total amount: <span class="text-danger">{{totalAmount | currency:'€'}}</span>
+                </h5>
+                <p class="text-center"><a href="#!checkout">Checkout</a> | <a href="#"
+                        ng-click="$event.preventDefault(); resetBasket()">Reset</a></p>
+            </div>
+        </div>
+    </div>
+    <script src="Controllers/indexController.js"></script>
+    <script src="Controllers/checkoutController.js"></script>
+    <script src="Controllers/productsController.js"></script>
+    <script src="Controllers/basketController.js"></script>
+</body>
+
+</html>
