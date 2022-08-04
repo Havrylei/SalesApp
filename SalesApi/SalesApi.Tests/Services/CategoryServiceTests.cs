@@ -1,6 +1,6 @@
 ﻿using AutoFixture;
 using FluentAssertions;
-using SalesApi.Entities;
+using SalesApi.Infrastructure.Entities;
 using SalesApi.Services;
 
 namespace SalesApi.Tests.Services

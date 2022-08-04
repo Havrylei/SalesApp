@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using SalesApi.DTOs;
-using SalesApi.Entities;
+using SalesApi.Infrastructure.DTOs;
+using SalesApi.Infrastructure.Entities;
 
 namespace SalesApi.Infrastructure
 {

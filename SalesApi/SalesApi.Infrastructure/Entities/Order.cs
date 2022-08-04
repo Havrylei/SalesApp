@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace SalesApi.Entities
+namespace SalesApi.Infrastructure.Entities
 {
     public class Order
     {

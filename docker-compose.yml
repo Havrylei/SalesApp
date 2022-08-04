@@ -1,16 +1,11 @@
 version: '3.4'
 
 services:
-  salesdb:
-    image: postgres
-    restart: always
   salesapi:
     image: salesapi
     build: 
-      context: SalesApi/SalesApi/
+      context: SalesApi/
       dockerfile: Dockerfile
-    depends_on:
-      - salesdb
   salesui:
     image: salesui
     build: 

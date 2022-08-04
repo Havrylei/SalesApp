@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SalesApi.Entities;
+using SalesApi.Infrastructure.Entities;
 
 namespace SalesApi.Infrastructure.Extensions
 {

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using SalesApi.DTOs;
+using SalesApi.Infrastructure.DTOs;
 using SalesApi.Infrastructure;
 using SalesApi.Services.Interfaces;
 

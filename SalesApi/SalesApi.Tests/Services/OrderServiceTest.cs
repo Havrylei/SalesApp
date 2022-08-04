@@ -1,8 +1,8 @@
 ﻿using AutoFixture;
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
-using SalesApi.DTOs;
-using SalesApi.Entities;
+using SalesApi.Infrastructure.DTOs;
+using SalesApi.Infrastructure.Entities;
 using SalesApi.Services;
 
 namespace SalesApi.Tests.Services

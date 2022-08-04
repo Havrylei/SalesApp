@@ -1,4 +1,4 @@
-﻿using SalesApi.DTOs;
+﻿using SalesApi.Infrastructure.DTOs;
 
 namespace SalesApi.Services.Interfaces
 {

@@ -1,4 +1,4 @@
-﻿namespace SalesApi.DTOs
+﻿namespace SalesApi.Infrastructure.DTOs
 {
     public class ProductDto
     {

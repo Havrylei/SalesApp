@@ -2,13 +2,13 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using SalesApi.Infrastructure;
 
 #nullable disable
 
-namespace SalesApi.Migrations
+namespace SqlServerMigrations.Migrations
 {
     [DbContext(typeof(SalesDbContext))]
     partial class SalesDbContextModelSnapshot : ModelSnapshot
@@ -17,20 +17,20 @@ namespace SalesApi.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.5")
-                .HasAnnotation("Relational:MaxIdentifierLength", 63);
+                .HasAnnotation("ProductVersion", "6.0.7")
+                .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("SalesApi.Entities.Category", b =>
+            modelBuilder.Entity("SalesApi.Infrastructure.Entities.Category", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -39,44 +39,44 @@ namespace SalesApi.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("b85a72af-2271-4a72-be3d-b805cd63a608"),
+                            Id = new Guid("83ccab3c-8501-4f54-a28c-96b81d43d73c"),
                             Name = "Food"
                         },
                         new
                         {
-                            Id = new Guid("62c10f43-4ece-48bc-baf3-43a98d7fc25c"),
+                            Id = new Guid("cde42a15-9e97-4cde-969f-7bb0836c6585"),
                             Name = "Сlothes"
                         });
                 });
 
-            modelBuilder.Entity("SalesApi.Entities.Order", b =>
+            modelBuilder.Entity("SalesApi.Infrastructure.Entities.Order", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
                     b.ToTable("Orders");
                 });
 
-            modelBuilder.Entity("SalesApi.Entities.OrderItem", b =>
+            modelBuilder.Entity("SalesApi.Infrastructure.Entities.OrderItem", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("OrderId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("ProductId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Qty")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -85,34 +85,34 @@ namespace SalesApi.Migrations
                     b.ToTable("OrderItems");
                 });
 
-            modelBuilder.Entity("SalesApi.Entities.Product", b =>
+            modelBuilder.Entity("SalesApi.Infrastructure.Entities.Product", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("CategoryId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("ImageUrl")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Price")
-                        .HasColumnType("numeric");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("StockQty")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -123,108 +123,108 @@ namespace SalesApi.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("be03c6dc-cb4e-4beb-95b0-c92a3113d054"),
-                            CategoryId = new Guid("b85a72af-2271-4a72-be3d-b805cd63a608"),
-                            CreatedAt = new DateTime(2022, 8, 2, 18, 34, 23, 269, DateTimeKind.Utc).AddTicks(877),
+                            Id = new Guid("70c977fb-0745-4bfa-a24b-331c2030a5eb"),
+                            CategoryId = new Guid("83ccab3c-8501-4f54-a28c-96b81d43d73c"),
+                            CreatedAt = new DateTime(2022, 8, 4, 16, 0, 19, 477, DateTimeKind.Utc).AddTicks(7330),
                             ImageUrl = "https://images.unsplash.com/photo-1570145820259-b5b80c5c8bd6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80",
                             Name = "Brownie",
                             Price = 0.65m,
                             StockQty = 48,
-                            UpdatedAt = new DateTime(2022, 8, 2, 18, 34, 23, 269, DateTimeKind.Utc).AddTicks(871)
+                            UpdatedAt = new DateTime(2022, 8, 4, 16, 0, 19, 477, DateTimeKind.Utc).AddTicks(7329)
                         },
                         new
                         {
-                            Id = new Guid("c08427cd-0b5c-45e8-a4bc-ee09591ac465"),
-                            CategoryId = new Guid("b85a72af-2271-4a72-be3d-b805cd63a608"),
-                            CreatedAt = new DateTime(2022, 8, 2, 18, 34, 23, 269, DateTimeKind.Utc).AddTicks(879),
+                            Id = new Guid("a65b30f7-9836-4483-9eb2-06e6ba858f2d"),
+                            CategoryId = new Guid("83ccab3c-8501-4f54-a28c-96b81d43d73c"),
+                            CreatedAt = new DateTime(2022, 8, 4, 16, 0, 19, 477, DateTimeKind.Utc).AddTicks(7332),
                             ImageUrl = "https://images.unsplash.com/photo-1607958996333-41aef7caefaa?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
                             Name = "Muffin",
                             Price = 1.00m,
                             StockQty = 36,
-                            UpdatedAt = new DateTime(2022, 8, 2, 18, 34, 23, 269, DateTimeKind.Utc).AddTicks(879)
+                            UpdatedAt = new DateTime(2022, 8, 4, 16, 0, 19, 477, DateTimeKind.Utc).AddTicks(7332)
                         },
                         new
                         {
-                            Id = new Guid("8792fb33-c7f1-40ba-8d9f-518053ee97f0"),
-                            CategoryId = new Guid("b85a72af-2271-4a72-be3d-b805cd63a608"),
-                            CreatedAt = new DateTime(2022, 8, 2, 18, 34, 23, 269, DateTimeKind.Utc).AddTicks(881),
+                            Id = new Guid("74da4602-a7a4-4930-b68a-dd149ec63550"),
+                            CategoryId = new Guid("83ccab3c-8501-4f54-a28c-96b81d43d73c"),
+                            CreatedAt = new DateTime(2022, 8, 4, 16, 0, 19, 477, DateTimeKind.Utc).AddTicks(7334),
                             ImageUrl = "https://images.unsplash.com/photo-1553786013-ad9531e591d4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1135&q=80",
                             Name = "Cake Pop",
                             Price = 1.35m,
                             StockQty = 24,
-                            UpdatedAt = new DateTime(2022, 8, 2, 18, 34, 23, 269, DateTimeKind.Utc).AddTicks(880)
+                            UpdatedAt = new DateTime(2022, 8, 4, 16, 0, 19, 477, DateTimeKind.Utc).AddTicks(7333)
                         },
                         new
                         {
-                            Id = new Guid("e8b91c0f-9ee6-4f09-9a16-85ad70942350"),
-                            CategoryId = new Guid("b85a72af-2271-4a72-be3d-b805cd63a608"),
-                            CreatedAt = new DateTime(2022, 8, 2, 18, 34, 23, 269, DateTimeKind.Utc).AddTicks(893),
+                            Id = new Guid("8c3ccd57-d4a8-4ada-a213-b61aeba5680a"),
+                            CategoryId = new Guid("83ccab3c-8501-4f54-a28c-96b81d43d73c"),
+                            CreatedAt = new DateTime(2022, 8, 4, 16, 0, 19, 477, DateTimeKind.Utc).AddTicks(7335),
                             ImageUrl = "https://images.unsplash.com/photo-1584541305671-af4f46b4be2f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=965&q=80",
                             Name = "Apple tart",
                             Price = 1.50m,
                             StockQty = 60,
-                            UpdatedAt = new DateTime(2022, 8, 2, 18, 34, 23, 269, DateTimeKind.Utc).AddTicks(893)
+                            UpdatedAt = new DateTime(2022, 8, 4, 16, 0, 19, 477, DateTimeKind.Utc).AddTicks(7335)
                         },
                         new
                         {
-                            Id = new Guid("ad0b5f65-a2d8-4da1-8449-d6336fba19b2"),
-                            CategoryId = new Guid("b85a72af-2271-4a72-be3d-b805cd63a608"),
-                            CreatedAt = new DateTime(2022, 8, 2, 18, 34, 23, 269, DateTimeKind.Utc).AddTicks(895),
+                            Id = new Guid("21973832-ac20-498a-b6b6-798360e850e4"),
+                            CategoryId = new Guid("83ccab3c-8501-4f54-a28c-96b81d43d73c"),
+                            CreatedAt = new DateTime(2022, 8, 4, 16, 0, 19, 477, DateTimeKind.Utc).AddTicks(7366),
                             ImageUrl = "https://images.unsplash.com/photo-1595994195534-d5219f02f99f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
                             Name = "Water",
                             Price = 1.50m,
                             StockQty = 30,
-                            UpdatedAt = new DateTime(2022, 8, 2, 18, 34, 23, 269, DateTimeKind.Utc).AddTicks(894)
+                            UpdatedAt = new DateTime(2022, 8, 4, 16, 0, 19, 477, DateTimeKind.Utc).AddTicks(7365)
                         },
                         new
                         {
-                            Id = new Guid("bbd812c6-44bd-474e-932b-3503c64e0f5a"),
-                            CategoryId = new Guid("62c10f43-4ece-48bc-baf3-43a98d7fc25c"),
-                            CreatedAt = new DateTime(2022, 8, 2, 18, 34, 23, 269, DateTimeKind.Utc).AddTicks(896),
+                            Id = new Guid("79e9df11-2897-44fa-9a92-92947da0363d"),
+                            CategoryId = new Guid("cde42a15-9e97-4cde-969f-7bb0836c6585"),
+                            CreatedAt = new DateTime(2022, 8, 4, 16, 0, 19, 477, DateTimeKind.Utc).AddTicks(7367),
                             ImageUrl = "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=415&q=80",
                             Name = "Shirt",
                             Price = 2.00m,
                             StockQty = 5,
-                            UpdatedAt = new DateTime(2022, 8, 2, 18, 34, 23, 269, DateTimeKind.Utc).AddTicks(896)
+                            UpdatedAt = new DateTime(2022, 8, 4, 16, 0, 19, 477, DateTimeKind.Utc).AddTicks(7367)
                         },
                         new
                         {
-                            Id = new Guid("a5605979-523b-4702-9a97-429534c77991"),
-                            CategoryId = new Guid("62c10f43-4ece-48bc-baf3-43a98d7fc25c"),
-                            CreatedAt = new DateTime(2022, 8, 2, 18, 34, 23, 269, DateTimeKind.Utc).AddTicks(898),
+                            Id = new Guid("8b92fcd7-bee2-4cf8-abe6-c3717465728a"),
+                            CategoryId = new Guid("cde42a15-9e97-4cde-969f-7bb0836c6585"),
+                            CreatedAt = new DateTime(2022, 8, 4, 16, 0, 19, 477, DateTimeKind.Utc).AddTicks(7372),
                             ImageUrl = "https://images.unsplash.com/photo-1542272604-787c3835535d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1026&q=80",
                             Name = "Pants",
                             Price = 3.00m,
                             StockQty = 5,
-                            UpdatedAt = new DateTime(2022, 8, 2, 18, 34, 23, 269, DateTimeKind.Utc).AddTicks(897)
+                            UpdatedAt = new DateTime(2022, 8, 4, 16, 0, 19, 477, DateTimeKind.Utc).AddTicks(7372)
                         },
                         new
                         {
-                            Id = new Guid("b80e1ded-c48b-4fa7-a9d8-adebc85f401c"),
-                            CategoryId = new Guid("62c10f43-4ece-48bc-baf3-43a98d7fc25c"),
-                            CreatedAt = new DateTime(2022, 8, 2, 18, 34, 23, 269, DateTimeKind.Utc).AddTicks(899),
+                            Id = new Guid("4400a395-45b4-4d6e-976f-34d7f81a3a5b"),
+                            CategoryId = new Guid("cde42a15-9e97-4cde-969f-7bb0836c6585"),
+                            CreatedAt = new DateTime(2022, 8, 4, 16, 0, 19, 477, DateTimeKind.Utc).AddTicks(7373),
                             ImageUrl = "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=436&q=80",
                             Name = "Jacket",
                             Price = 4.00m,
                             StockQty = 5,
-                            UpdatedAt = new DateTime(2022, 8, 2, 18, 34, 23, 269, DateTimeKind.Utc).AddTicks(899)
+                            UpdatedAt = new DateTime(2022, 8, 4, 16, 0, 19, 477, DateTimeKind.Utc).AddTicks(7373)
                         },
                         new
                         {
-                            Id = new Guid("8571fd36-04ad-431d-857d-5f13b9b34baf"),
-                            CategoryId = new Guid("62c10f43-4ece-48bc-baf3-43a98d7fc25c"),
-                            CreatedAt = new DateTime(2022, 8, 2, 18, 34, 23, 269, DateTimeKind.Utc).AddTicks(901),
+                            Id = new Guid("e5dfae3f-c140-41c5-994d-737f8413b68f"),
+                            CategoryId = new Guid("cde42a15-9e97-4cde-969f-7bb0836c6585"),
+                            CreatedAt = new DateTime(2022, 8, 4, 16, 0, 19, 477, DateTimeKind.Utc).AddTicks(7375),
                             ImageUrl = "https://images.unsplash.com/photo-1582845512747-e42001c95638?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
                             Name = "Toy",
                             Price = 2.00m,
                             StockQty = 1,
-                            UpdatedAt = new DateTime(2022, 8, 2, 18, 34, 23, 269, DateTimeKind.Utc).AddTicks(900)
+                            UpdatedAt = new DateTime(2022, 8, 4, 16, 0, 19, 477, DateTimeKind.Utc).AddTicks(7375)
                         });
                 });
 
-            modelBuilder.Entity("SalesApi.Entities.OrderItem", b =>
+            modelBuilder.Entity("SalesApi.Infrastructure.Entities.OrderItem", b =>
                 {
-                    b.HasOne("SalesApi.Entities.Order", "Order")
+                    b.HasOne("SalesApi.Infrastructure.Entities.Order", "Order")
                         .WithMany("OrderItems")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -233,9 +233,9 @@ namespace SalesApi.Migrations
                     b.Navigation("Order");
                 });
 
-            modelBuilder.Entity("SalesApi.Entities.Product", b =>
+            modelBuilder.Entity("SalesApi.Infrastructure.Entities.Product", b =>
                 {
-                    b.HasOne("SalesApi.Entities.Category", "Category")
+                    b.HasOne("SalesApi.Infrastructure.Entities.Category", "Category")
                         .WithMany("Products")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -244,12 +244,12 @@ namespace SalesApi.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("SalesApi.Entities.Category", b =>
+            modelBuilder.Entity("SalesApi.Infrastructure.Entities.Category", b =>
                 {
                     b.Navigation("Products");
                 });
 
-            modelBuilder.Entity("SalesApi.Entities.Order", b =>
+            modelBuilder.Entity("SalesApi.Infrastructure.Entities.Order", b =>
                 {
                     b.Navigation("OrderItems");
                 });

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace SalesApi.DTOs
+namespace SalesApi.Infrastructure.DTOs
 {
     public class OrderItemDto
     {

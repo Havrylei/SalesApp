@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SalesApi.DTOs;
+using SalesApi.Infrastructure.DTOs;
 using SalesApi.Services.Interfaces;
 
 namespace SalesApi.Controllers

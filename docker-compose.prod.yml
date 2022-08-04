@@ -1,21 +1,12 @@
 version: '3.4'
 
 services:
-  salesdb:
-    image: postgres
-    restart: always
-    environment:
-      POSTGRES_PASSWORD: supers3cret
-      POSTGRES_USER: sa
-      POSTGRES_DB: SalesDb
-    ports:
-      - 5432:5432
   salesapi:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=https://+:7174
-    depends_on:
-      - salesdb
+      - ConnectionStrings__DefaultConnection=${ProdConnectionStrings}
+      - SqlProvider=SqlServer
     ports:
       - 7174:7174
     volumes:
